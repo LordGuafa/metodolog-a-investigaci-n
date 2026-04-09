@@ -1,0 +1,43 @@
+\section{Marco Teórico}
+\subsection{Señales de audio digital}
+Una señal de audio digital es representada por una onda sonora que viaja atraves del espacio y es percibida por las personas o seres con capacidad auditiva, esta es percibida en un rango de frecuencia en especifico (20hz y 20khz), son de naturaleza analógica, por lo que estarán continuamente sobre un tiempo y amplitud.
+El audio digital se compone de información almacenada, si se explora cualquier base de datos de audio, se encontraran archivos digitales con fragmentos de sonido que pueden contener narraciones o música. Estos existen en diferentes formatos de archivo como .wav (Waveform Audio File), .flac (Free Lossless Audio Codec) y .mp3 (MPEG-1 Audio Layer 3). Estos formatos difieren principalmente en como comprimen la representación digital de la señal de audio.
+
+Explorando más de fondo los sonidos, tomando los provenientes del mundo real estos varían continuamente, y al momento de la grabación digital es siempre solo una aproximación de la gama completa de sonidos que existen. No obstante, los avances alcanzados en las tecnologías de grabación amplian continuamente el espectro y la precisión de lo que puede grabarse digitalmente.
+
+Cuando se realiza una grabación digital desde una fuente analógica, como sucede en un concierto en directo o un grupo de músicos que se encuentran en un estudio de grabación, el sonido se muestra en intervalos periódicos. La amplitud del sonido se graba como un número, lo que crea un registro digital de la fuente de audio analógica con una serie de números discretos.
+
+Para determinar la cantidad de sonido analógico original que se captura con la grabación digital, se depende principalmente de la velocidad de muestreo y de la profundidad de los bits (número de muestras que se toman por segundo y cantidad de información que contiene cada muestra).
+
+Ya al tener la grabación del audio digital, se puede almacenar en distintos formatos como se nombraron anteriormente, cada uno de los cuales tiene un modo distinto de equilibrar la calidad del sonido con el tamaño del archivo digital que se está creando, sin embargo el tamaño del reproductor de música afectara directamente a la recepción de la calidad del audio.
+
+
+\subsection{Análisis espectral}
+El análisis espectral es fundamental para entender la profundidad de un audio como señal, esta permite la distribución de energía de una señal en función de la frecuencia. Para este caso el audio consiste en el análisis al descomponer una señal sonora compleja en sus componentes frecuenciales, así permitiendo la identificación de las frecuencias presentes y su amplitud
+
+Ya adentrándonos en lo matemático, el análisis espectral se basa como tal en la Transformada de Fourier, por la cual se permite representar una señal en el dominio del tiempo como si fuera una suma de ondas sinusoidales con distintas frecuencias. En lo que es procesamiento digital de señales, esta se utiliza comúnmente con la Transformada Rápida de Fourier (FFT), que permite como tal una implementación eficiente de este cálculo de frecuencias.
+
+En este contexto de ondas, el espectrograma pasa a ser en una herramienta clave, esta ya pasa a permitir visualizar simultáneamente la evolución temporal del fenómeno, las frecuencias presentes en cada instante y su intensidad. Dentro de un espectrograma, comúnmente, el eje horizontal representa el tiempo, el eje vertical la frecuencia, y la intensidad de cada componente se representa mediante colores o niveles de grises.
+
+Como tal, el análisis espectral es precisamente relevante ya en aplicaciones musicales, ya que lo que son las notas y los acordes están directamente relacionados con una serie de combinaciones específicas de frecuencias. Por lo que este tipo de análisis constituye una base necesaria para elaborar sistemas de transcripción automática de música y reconocimiento de acordes.
+
+
+\subsection{Representación musical: notas y acordes}
+A lo largo de este trabajo se usa el cifrado americano, también llamado cifrado literal, que clasifica las notas de la A a la G comenzando por la nota La. La razón de esta elección es principalmente operativa: el sistema ofrece una nomenclatura uniforme que simplifica tanto la escritura de acordes como su tratamiento sistemático.
+El cifrado funciona mediante sufijos y extensiones estandarizadas. La ausencia de sufijo indica un acorde mayor (C); el sufijo "m" señala un acorde menor (Cm); "7" corresponde a un acorde dominante (C7). Desde ahí, pueden representarse estructuras más complejas: extensiones como novenas, oncenas o trecenas (C9, C11, C13), alteraciones (C7\#5, C7$\flat$9) y adiciones (Cadd9). Esta codificación compacta permite leer de un vistazo la sonoridad y la función armónica de cada acorde, lo que resulta especialmente conveniente en tareas de análisis y procesamiento automático de información musical.
+
+\subsection{Extracción de características}
+
+Para facilitar el análisis automático de señales de audio, es necesario extraer características relevantes. Entre las más utilizadas se encuentran:
+
+\begin{itemize}
+\item Espectrogramas
+\item Transformada Constant-Q (CQT)
+\item Características cromáticas (chroma features)
+\end{itemize}
+
+\subsection{Aprendizaje automático aplicado al audio}
+Una herramienta clave para la elaboración del sistema es entender el uso de un aprendizaje automático (Machine Learning), esta consiste en una rama de la inteligencia artificial que permite a los sistemas computacionales aprender patrones a partir de datos y mejorar constantemente su desempeño sin ser programados en cada mejora como tal. Para este enfoque, se busca que un modelo se entrene utilizando datos de entrada con sus respectivas etiquetas, permitiendo posteriormente el realizar predicciones sobre nuevos datos \cite{jamshidi2024machine}.
+
+
+Ya para el contexto del procesamiento de audio, el aprendizaje automático se utiliza en si para analizar y reconocer patrones presentes en señales sonoras, como lo son la voz, la música o sonidos ambientales. Sin embargo, trabajar con audio presenta desafíos que según la escala pueden llegar a ser muy complejos, esto se debe a que las señales no son directamente interpretables como datos estructurados por lo que es necesario que antes sean transformadas en representaciones numéricas adecuadas para el análisis \cite{roman2020data}.

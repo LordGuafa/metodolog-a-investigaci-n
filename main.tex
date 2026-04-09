@@ -1,0 +1,94 @@
+\documentclass[journal]{IEEEtran}
+
+% Codificación
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Matemáticas
+\usepackage{amsmath,amssymb}
+
+% Figuras
+\usepackage{graphicx}
+
+% Tablas
+\usepackage{tabularx}
+\usepackage{array}
+% Código
+\usepackage{minted}
+\usepackage{xcolor}
+
+% Citas e hipervínculos
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}
+
+
+% Configuración código
+\definecolor{bgcolor}{rgb}{0.97,0.97,0.97}
+\setminted{
+    bgcolor=bgcolor,
+    fontsize=\small,
+    linenos=true,
+    frame=single,
+    breaklines=true
+}
+
+\bibliographystyle{IEEEtran}
+
+\title{Detección automática de acordes de guitarra acústica a partir de señales de audio mediante aprendizaje automático}
+
+\author{
+J. D. Córdoba Aguirre, S. Aljure Bernal, J. E. Buitrago Chavez\\
+\textit{Universidad Distrital Francisco José de Caldas}\\
+Bogotá, Colombia\\
+Marzo 2026
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+La transcripción automática de música (Automatic Music Transcription, AMT) es un área de investigación dentro del campo de Music Information Retrieval (MIR) cuyo objetivo consiste en transformar señales de audio musical en representaciones simbólicas como notas, acordes o partituras. Este problema resulta especialmente complejo en instrumentos polifónicos como la guitarra acústica, donde múltiples notas se producen simultáneamente generando espectros armónicos superpuestos.
+
+En este trabajo se presenta un enfoque para la detección e identificación automática de acordes de guitarra acústica a partir de grabaciones de audio. La metodología propuesta se basa en el procesamiento espectral de la señal y en el uso de modelos de aprendizaje automático para reconocer patrones armónicos asociados a distintos acordes musicales.
+
+Este estudio busca contribuir al desarrollo de herramientas computacionales que faciliten el análisis automático de interpretaciones musicales y la generación de representaciones simbólicas a partir de señales de audio \cite{benetos2019automatic}.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Automatic Music Transcription, procesamiento de audio, reconocimiento de acordes, guitarra acústica, aprendizaje automático.
+\end{IEEEkeywords}
+
+\input{src/1. Introduccion}
+\input{src/2. Marco teorico.tex}
+
+
+
+
+
+
+
+% \section{Metodología}
+
+% En esta sección se describe el proceso de construcción del modelo propuesto. Se incluyen las etapas de adquisición de datos, preprocesamiento de la señal de audio, extracción de características y entrenamiento del modelo.
+
+% \subsection{Preprocesamiento}
+
+% Las señales de audio son transformadas a representaciones espectrales como espectrogramas o CQT para facilitar el análisis.
+
+% \subsection{Modelo}
+
+% Se emplea un modelo de aprendizaje automático para la clasificación de acordes basado en características espectrales.
+
+% \section{Resultados}
+
+% En esta sección se presentan los resultados obtenidos tras el entrenamiento del modelo, incluyendo métricas de evaluación como precisión y exactitud.
+
+% \section{Conclusiones}
+
+% Se desarrolló un modelo capaz de identificar acordes de guitarra acústica a partir de señales de audio, demostrando la viabilidad del uso de técnicas de aprendizaje automático en problemas de transcripción musical.
+
+\bibliography{references}
+
+\end{document}
