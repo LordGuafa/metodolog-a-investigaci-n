@@ -1,0 +1,19 @@
+\section{Objetivos}
+En esta sección se plantean los objetivos generales y específicos que guiarán el desarrollo de este trabajo de investigación.
+
+\subsection{Objetivo general}
+Desarrollar un sistema automático que, a partir de una grabación de audio de guitarra acústica, identifique el acorde que se está ejecutando con una precisión exacta mínima del 85 $\%$ y genere su representación simbólica en cifrado americano.
+
+\subsection{Objetivos específicos}
+\begin{itemize}
+
+\item  Extraer y comparar cuatro tipos de características acústicas (STFT, CQT, chromagram y energía de armónicos) para determinar la representación más adecuada para la detección de acordes.
+\item  Implementar y entrenar tres arquitecturas de aprendizaje automático (CNN 2‑D, CNN + RNN, Transformer) y optimizar sus hiperparámetros mediante búsqueda bayesiana.
+\item  Evaluar el desempeño de cada modelo mediante exact‑match accuracy, top‑3 accuracy y macro‑F1, utilizando validación cruzada de 5‑fold.
+\item
+\item  Analizar la robustez del mejor modelo frente a variaciones de afinación, técnicas de ejecución y presencia de ruido de fondo, reportando la degradación del rendimiento por cada factor.
+
+\item  Documentar el proceso completo y publicar los resultados en una revista de Music Information Retrieval, liberando el código fuente bajo licencia MIT en GitHub.
+\item Investigar y discutir las limitaciones del sistema propuesto, así como posibles mejoras y aplicaciones futuras en el ámbito de la transcripción musical automática y el análisis de audio.
+
+\end{itemize}
