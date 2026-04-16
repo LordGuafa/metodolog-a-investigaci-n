@@ -1,6 +1,6 @@
 \section{Marco Teórico}
 \subsection{Señales de audio digital}
-Una señal de audio digital es representada por una onda sonora que viaja atraves del espacio y es percibida por las personas o seres con capacidad auditiva, esta es percibida en un rango de frecuencia en especifico (20hz y 20khz), son de naturaleza analógica, por lo que estarán continuamente sobre un tiempo y amplitud.
+Una señal de audio digital es representada por una onda sonora que viaja a través del espacio y es percibida por las personas o seres con capacidad auditiva, esta es percibida en un rango de frecuencia en especifico (20hz y 20khz), son de naturaleza analógica, por lo que estarán continuamente sobre un tiempo y amplitud.
 El audio digital se compone de información almacenada, si se explora cualquier base de datos de audio, se encontraran archivos digitales con fragmentos de sonido que pueden contener narraciones o música. Estos existen en diferentes formatos de archivo como .wav (Waveform Audio File), .flac (Free Lossless Audio Codec) y .mp3 (MPEG-1 Audio Layer 3). Estos formatos difieren principalmente en como comprimen la representación digital de la señal de audio.
 
 Explorando más de fondo los sonidos, tomando los provenientes del mundo real estos varían continuamente, y al momento de la grabación digital es siempre solo una aproximación de la gama completa de sonidos que existen. No obstante, los avances alcanzados en las tecnologías de grabación amplian continuamente el espectro y la precisión de lo que puede grabarse digitalmente.
@@ -36,6 +36,37 @@ Para facilitar el análisis automático de señales de audio, es necesario extra
 \item Características cromáticas (chroma features)
 \end{itemize}
 
+El proceso de extraer las caracteristicas es una etapa fundamental necesaria para el procesamiento de audio, esto se fundamenta en el hecho de transformar una señal en su etapa cruda y volverla uan representación numérica, que es aqui donde es aplicable los modelos de machine learning. En el concepto de música se convierte en una etapa crucial para extraer información del tipo armónicoy de los tiempos de una señal \cite{benetos2019automatic, jamshidi2024machine}.
+
+Las señales de audito en si representan una alta variabilidad y de igual forma alta complejidad, por lo que es necesesario representar patrones significativos en el dominio tiempo-frecuencia. Aquí es donde los espectrogramas se pueden utilizar como representación base, esto debido a que permiten analizar la evolución temporal de las frecuencias presentes en una señal \cite{roman2020data}.
+
+El espectrograma se obtiene a partir de la Transformada de Fourier de tiempo corto (Short-Time Fourier Transform, STFT), la cual se define como:
+
+\begin{equation}
+X(n, k) = \sum_{m=-\infty}^{\infty} x[m] \, w[n - m] \, e^{-j 2 \pi k m / N}
+\end{equation}
+
+donde $x[m]$ es la señal de audio, $w[n]$ es una ventana de análisis, $n$ representa el índice temporal y $k$ el índice de frecuencia. Esta formula nos permite representar los segmentos locales de la señal y de igual forma analizarlos, tomando información relevante tanto del aspecto temporal como frecuencial.
+
+La ventaja de tomar información a partir del espectrograma, es la posibilidad de  derivar otras características más específicas para el análisis musical. Una de las más relevantes es la Transformada de Q constante (Constant-Q Transform, CQT), la cual ofrece una resolución logarítmica en datos de frecuencia, permitiendo ya lo que es una alineación mucho más apta a la percepción musical humana \cite{telila2025automatic}. La CQT se define como:
+
+\begin{equation}
+X_{CQT}(k) = \sum_{n=0}^{N_k-1} x[n] \, a_k^*[n]
+\end{equation}
+
+donde $a_k[n]$ corresponde a los filtros de frecuencia centrados en cada banda $k$.
+
+Por otro lado, otra caracteristica muy util y muy usada en un análisis musical es el \textit{chroma}, por la cual se agrupa la energía de las frecuencias en 12 clases correspondientes a las notas musicales de la escala cromática. Al utilizar este tipo de representación se vuelve muy útil al momento de identificar acordes, ya que captura la estructura armónica independientemente de la octava y toma como tal la base \cite{benetos2013challenges}.
+
+El vector cromático se puede expresar como:
+
+\begin{equation}
+c(p) = \sum_{k \in \mathcal{K}_p} |X(k)|
+\end{equation}
+
+donde $\mathcal{K}_p$ representa el conjunto de frecuencias asociadas a la clase tonal $p$.
+
+Tomando en conjunto, lo que son estas representaciones permiten reducir la dimensionalidad de una señal de audio y abstraer características relevantes en uso y volverlas una clasificación, permitiendo una entrada de datos que facilite el entrenamiento de modelos de aprendizaje automático, ya para una detección e identificación de acordes musicales.
 \subsection{Aprendizaje automático aplicado al audio}
 Una herramienta clave para la elaboración del sistema es entender el uso de un aprendizaje automático (Machine Learning), esta consiste en una rama de la inteligencia artificial que permite a los sistemas computacionales aprender patrones a partir de datos y mejorar constantemente su desempeño sin ser programados en cada mejora como tal. Para este enfoque, se busca que un modelo se entrene utilizando datos de entrada con sus respectivas etiquetas, permitiendo posteriormente el realizar predicciones sobre nuevos datos \cite{jamshidi2024machine}.
 

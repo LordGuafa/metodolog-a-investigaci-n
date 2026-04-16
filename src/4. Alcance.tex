@@ -1,0 +1,18 @@
+\section{Alcance}
+El alcance de este trabajo se centra en el desarrollo de un sistema automático para la identificación de acordes a partir de grabaciones de audio de guitarra acústica. Este sistema se diseñará específicamente para reconocer acordes en el contexto de la música popular occidental, utilizando el cifrado americano como formato de representación simbólica. El enfoque se limitará a acordes comunes y sus variaciones más frecuentes, sin abordar acordes extremadamente complejos o poco convencionales. Además, el sistema se evaluará principalmente en términos de precisión de identificación de acordes, sin considerar aspectos relacionados con la interpretación musical o la calidad sonora de las grabaciones. El alcance también incluye la implementación de modelos de aprendizaje automático y la comparación de diferentes representaciones acústicas, pero no se extenderá a la creación de una aplicación de usuario final o a la integración con plataformas de música digital.
+
+\subsection{Objetivo general del alcance}
+Crear una solución de software que permita la identificación de acordes de guitarra clásica a partir de pistas de audio, con una precisión $\geq 85\%$, representando los acordes identificados en cifrado americano, y evaluando su desempeño mediante métricas de exactitud y robustez frente a variaciones de ejecución y ruido.
+
+\subsection{Delimitación funcional}
+\begin{itemize}
+
+\item \textbf{Ingesta de audio:} El sistema estará diseñado para el procesamiento de pistas de audio de guitarra acústica con encordado de nylon, con afinación estándar a $440 Hz$ en formatos $.wav$, $.flac$ y $.mp3$ con una tasa de muestreo mínima de $44.1 kHz$ y una profundidad de bits de al menos 16 bits. No se tiene contemplado el procesamiento de audio en tiempo real, ni la transcripción de otro tipo de instrumentos o variaciones de guitarra.
+
+\item \textbf{Pre-procesamiento espectral:} El sistema realizará el pre-procesamiento de las pistas de audio desde la extracción de características acústicas, incluyendo la generación de espectrogramas, transformada Constant-Q (CQT), características cromáticas (chroma features) y energía de armónicos con una normalización y segmentación en frames de 0,5s con un solapamiento del 50$\%$. No se incluirán técnicas avanzadas de separación de fuentes o reducción de ruido más allá de filtros básicos.
+
+\item \textbf{Modelo de aprendizaje automático:} El sistema implementará y entrenará tres arquitecturas de aprendizaje automático, CNN-2D, CNN+RNN y Transformer, utilizando un conjunto de datos etiquetado de acordes de guitarra acústica. La optimización de hiperparámetros se realizará mediante búsqueda bayesiana, pero no se explorarán técnicas de meta-aprendizaje o aprendizaje profundo más avanzadas. De igual forma la comparación entre los modelos se realizará de forma interna, de tal forma que el sistema determina de forma autónoma el mejor modelo, sin Sin embargo no se contempla una comparación con modelos de última generación o con sistemas comerciales existentes.
+
+\item \textbf{Post-procesado de resultados:} El sistema realizará la conversión del vector de probabilidades a la notación de cifrado americano, aplicando umbrales de decisión para la clasificación de acordes, así como también el agrupamiento de acordes idénticos para evitar repeticiones innecesarias. No se incluirá el análisis de progresiones armónicas ni la generación de partituras complejas.
+
+\end{itemize}
