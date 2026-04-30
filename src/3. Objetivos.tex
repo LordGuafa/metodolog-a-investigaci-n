@@ -7,7 +7,7 @@ Desarrollar un sistema automático que, a partir de una grabación de audio de g
 \subsection{Objetivos específicos}
 \begin{itemize}
 
-\item  Extraer y comparar cuatro tipos de características acústicas (STFT, CQT, chromagram y energía de armónicos) para determinar la representación más adecuada para la detección de acordes.
+\item  Extraer y comparar cuatro tipos de características acústicas (transformada de Fourier de tiempo corto, CQT, chromagram y energía de armónicos) para determinar la representación más adecuada para la detección de acordes.
 \item  Implementar y entrenar tres arquitecturas de aprendizaje automático (CNN 2‑D, CNN + RNN, Transformer) y optimizar sus hiperparámetros mediante búsqueda bayesiana.
 \item  Evaluar el desempeño de cada modelo mediante exact‑match accuracy, top‑3 accuracy y macro‑F1, utilizando validación cruzada de 5‑fold.
 \item  Analizar la robustez del mejor modelo frente a variaciones de afinación, técnicas de ejecución y presencia de ruido de fondo, reportando la degradación del rendimiento por cada factor.
