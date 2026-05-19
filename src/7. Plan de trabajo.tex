@@ -24,3 +24,43 @@ Una vez entrenados los modelos, s.e realizará una comparación exhaustiva de su
 \subsection{Pruebas}
 
 Finalmente, se evaluará la robustez del mejor modelo frente a variaciones de afinación, técnicas de ejecución y presencia de ruido de fondo, comparando los resultados obtenidos con una revisión manual bajo los criterios de teoría musical. Se documentarán los resultados obtenidos y se discutirán las limitaciones del sistema propuesto, así como posibles mejoras y aplicaciones futuras en el ámbito de la transcripción musical automática y el análisis de audio.
+
+\newpage
+
+\section{Cronograma}
+
+El cronograma propuesto para el desarrollo de la investigación está distribuido en un período de ocho (8) meses a partir de la aprobación del anteproyecto. El Cuadro \ref{tab:cronograma} ilustra la distribución temporal de las fases del plan de trabajo.
+
+\begin{table}[H]
+\centering
+\caption{Cronograma de actividades del proyecto}
+\label{tab:cronograma}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Actividad} & \textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} & \textbf{M7} & \textbf{M8} \\
+\hline
+Revisión documental & $\bullet$ & $\bullet$ & & & & & & \\
+\hline
+Preprocesamiento de datos & & $\bullet$ & $\bullet$ & & & & & \\
+\hline
+Implementación del modelo & & & & $\bullet$ & $\bullet$ & & & \\
+\hline
+Entrenamiento del modelo & & & & & $\bullet$ & $\bullet$ & $\bullet$ & \\
+\hline
+Comparación de modelos & & & & & & & $\bullet$ & \\
+\hline
+Pruebas & & & & & & & & $\bullet$ \\
+\hline
+\end{tabular}
+\end{table}
+
+Al finalizar cada una de estas actividades, se espera cumplir con los siguientes entregables principales:
+
+\begin{itemize}
+\item \textbf{Mes 1 - 2 | Revisión documental:} Datasets seleccionados y documentados, junto con la revisión bibliográfica consolidada.
+\item \textbf{Mes 2 - 3 | Preprocesamiento de datos:} Pipeline de código funcional con la extracción de características espectrales validadas.
+\item \textbf{Mes 4 - 5 | Implementación del modelo:} Arquitecturas base implementadas y listas para su entrenamiento.
+\item \textbf{Mes 5 - 7 | Entrenamiento del modelo:} Modelos entrenados con hiperparámetros optimizados y resultados preliminares registrados.
+\item \textbf{Mes 7 | Comparación de modelos:} Reporte de desempeño comparativo con las métricas establecidas (exact-match accuracy, top-3 accuracy, macro-F1).
+\item \textbf{Mes 8 | Pruebas:} Validación de robustez finalizada y entrega del documento de tesis.
+\end{itemize}
