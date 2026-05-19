@@ -22,20 +22,14 @@
 \usepackage{fancyhdr}
 \usepackage[]{fncychap}
 
- \usepackage{pstricks,pst-all}
+\usepackage{pstricks,pst-all}
 
- \usepackage[dvips]{graphicx}
+\usepackage[dvips]{graphicx}
 
 %Paquete para insertar mejor los objetos flotantes
 \usepackage{float}
 
-%Hipervinculos
-%\usepackage[pdfborder={0 0 0}]{hyperref}
-%\hypersetup{pdfauthor={Nombre autor,pdfstartpage={1},pdftitle={Nombre libro},pdfpagemode={UseOutlines}}
 
-%Definici�n de nuevos comandos
-%\newtheorem{defin}{Definici�n}[chapter]
-%\newcommand{\hgt}{\text{\rm hgt}}
 
 \newenvironment{abstract}{%
     \chapter*{Resumen}%
@@ -44,26 +38,20 @@
 }
 %Numeracion de secciones bajo capitulos
 \renewcommand{\thesection}{\thechapter.\arabic{section}}
-%Portada Nota: \maketitle en formato book no permite eliminar numeraci�n
-%\title{}
-%\author{}
-%\date{}
+
 
 %Redefinition de t�tulos y r�tulos
 \renewcommand{\listtablename}{\'Indice de tablas}
 \renewcommand{\tablename}{Tabla}
-%\renewcommand{\listfigurename}{Lista de figuras}
-%\renewcommand{\figurename}{Figura}
-%\renewcommand{\appendixname}{Anexo}
+
 
 \begin{document}
 \frontmatter
 
 \tableofcontents
-%\listoffigures
-%\listoftables
 
-%Numeraci�n principal
+
+
 \mainmatter
 
 %Parte de la formulacion del proyecto
@@ -77,7 +65,6 @@
 \input{src/4. Objetivos}
 
 
-%Parte del marco teorico
 \part{Marco teorico}
 
 \chapter{Marco de Referencia}
@@ -88,18 +75,12 @@
 \input{src/5. Alcance}
 \input{src/6. Limitaciones}
 \input{src/7. Plan de trabajo}
+\input{src/10.Desarrollo.tex}
 
-%\appendix
-%\input Anexo1
 
-%Numeraci�n final
 \backmatter
 
-%Para incluir la bibliograf�a .bib
-%\include{PRBiblio}
+
 \bibliographystyle{IEEEtran}
 \bibliography{references}
-
-%Para crear el �ndice alfab�tico
-%\printindex
 \end{document}
