@@ -1,0 +1,413 @@
+\documentclass[final]{beamer}
+\usepackage[size=a1,orientation=portrait,scale=1.15]{beamerposter}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shadows}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+% ─── Color palette ──────────────────────────────────────────────
+\definecolor{darkblue}{HTML}{1A237E}
+\definecolor{midblue}{HTML}{283593}
+\definecolor{accent}{HTML}{E53935}
+\definecolor{accentgold}{HTML}{F9A825}
+\definecolor{lightbg}{HTML}{E8EAF6}
+\definecolor{cardgray}{HTML}{ECEFF1}
+\definecolor{traincolor}{HTML}{1565C0}
+\definecolor{testcolor}{HTML}{C62828}
+\definecolor{losscolor}{HTML}{2E7D32}
+
+% ─── Beamer theme reset ─────────────────────────────────────────
+\usetheme{default}
+\setbeamercolor{background canvas}{bg=white}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{footline}{}
+
+% ─── tcolorbox styles ───────────────────────────────────────────
+\tcbset{
+  sectionbox/.style={
+    enhanced, colback=lightbg, colframe=darkblue,
+    fonttitle=\bfseries\large, coltitle=white,
+    attach boxed title to top left={yshift=-2mm, xshift=6mm},
+    boxed title style={colback=darkblue, colframe=darkblue, rounded corners},
+    arc=4pt, boxrule=1.2pt, left=6pt, right=6pt, top=8pt, bottom=6pt,
+    drop shadow
+  },
+  metricbox/.style={
+    enhanced, colback=#1!10, colframe=#1,
+    arc=6pt, boxrule=1.5pt,
+    halign=center, valign=center,
+    fontupper=\bfseries,
+    drop shadow
+  },
+  archbox/.style={
+    enhanced, colback=cardgray, colframe=midblue,
+    arc=3pt, boxrule=0.8pt, left=4pt, right=4pt, top=4pt, bottom=4pt
+  }
+}
+
+\begin{document}
+\begin{frame}[t]{}
+
+%% ============================================================
+%%  HEADER
+%% ============================================================
+\begin{tcolorbox}[
+  enhanced, colback=darkblue, colframe=darkblue,
+  arc=0pt, boxrule=0pt,
+  left=20pt, right=20pt, top=14pt, bottom=14pt
+]
+  \begin{columns}[c]
+    \begin{column}{0.80\linewidth}
+      {\color{white}\fontsize{32}{38}\selectfont\bfseries
+        Detecci\'on Autom\'atica de Acordes de Guitarra Ac\'ustica}\\[6pt]
+      {\color{accentgold}\fontsize{17}{22}\selectfont
+        Avance --- Entrenamiento CNN 2-D sobre GuitarSet}\\[4pt]
+      {\color{white!80!darkblue}\fontsize{12}{16}\selectfont
+        Transcripci\'on Autom\'atica de M\'usica (AMT) $\cdot$
+        Music Information Retrieval (MIR)}
+    \end{column}
+    \begin{column}{0.18\linewidth}
+      \centering
+      \begin{tikzpicture}
+        \node[draw=accentgold, line width=2pt, rounded corners=8pt,
+              fill=midblue, text=white, font=\bfseries\large,
+              minimum width=3.6cm, minimum height=3.6cm, align=center]
+          {CNN\\2-D\\{\normalsize GuitarSet}};
+      \end{tikzpicture}
+    \end{column}
+  \end{columns}
+\end{tcolorbox}
+
+\vspace{6pt}
+
+%% ============================================================
+%%  ROW 1 -- Resumen | Arquitectura
+%% ============================================================
+\begin{columns}[t,totalwidth=\linewidth]
+
+%% Col A
+\begin{column}{0.37\linewidth}
+
+\begin{tcolorbox}[sectionbox, title={$\blacktriangleright$ Resumen del Proyecto}]
+La \textbf{Transcripci\'on Autom\'atica de M\'usica (AMT)} busca convertir se\~nales de audio
+en representaciones simb\'olicas como acordes. Este trabajo desarrolla un sistema de
+clasificaci\'on de acordes de guitarra ac\'ustica usando \textbf{aprendizaje profundo}
+sobre caracter\'isticas espectrales extra\'idas con STFT, CQT y chroma features.
+
+\vspace{4pt}
+\begin{tcolorbox}[archbox, colframe=accent, colback=accent!5]
+  \textbf{\textcolor{accent}{Desaf\'io:}} Los instrumentos polif\'onicos generan
+  superposiciones arm\'onicas complejas que dificultan la separaci\'on y
+  clasificaci\'on de acordes.
+\end{tcolorbox}
+\end{tcolorbox}
+
+\vspace{6pt}
+
+\begin{tcolorbox}[sectionbox, title={$\bullet$ Objetivo}]
+Desarrollar un sistema autom\'atico que identifique acordes de guitarra ac\'ustica
+con una \textbf{precisi\'on exacta m\'inima del 85\,\%}, representando los resultados
+en cifrado americano.
+
+\vspace{5pt}
+\begin{tcolorbox}[archbox, colframe=accentgold, colback=accentgold!8]
+\textbf{M\'etricas de evaluaci\'on:}
+\begin{itemize}\setlength\itemsep{1pt}
+  \item Exact-match accuracy
+  \item Top-3 accuracy
+  \item Macro-F1
+\end{itemize}
+\end{tcolorbox}
+\end{tcolorbox}
+
+\vspace{6pt}
+
+\begin{tcolorbox}[sectionbox, title={$\square$ Dataset --- GuitarSet}]
+\begin{tabular}{@{}ll@{}}
+  \textbf{Instrumento}  & Guitarra ac\'ustica (nylo\'n) \\[2pt]
+  \textbf{Afinaci\'on}  & Est\'andar 440\,Hz \\[2pt]
+  \textbf{Formatos}     & .wav, .flac, .mp3 \\[2pt]
+  \textbf{Muestreo}     & $\geq$ 44.1\,kHz / 16\,bit \\[2pt]
+  \textbf{Frames}       & 0.5\,s, solapamiento 50\,\% \\[2pt]
+  \textbf{Validaci\'on} & 5-fold cross-validation \\
+\end{tabular}
+\end{tcolorbox}
+
+\end{column}
+
+%% Col B -- Architecture
+\begin{column}{0.61\linewidth}
+
+\begin{tcolorbox}[sectionbox, title={$\bigstar$ Arquitectura CNN 2-D}]
+\begin{center}
+\begin{tikzpicture}[
+  node distance=0.55cm and 0.4cm,
+  box/.style={draw, rounded corners=3pt, minimum width=2.55cm, minimum height=0.72cm,
+              font=\footnotesize\bfseries, align=center},
+  arr/.style={-Stealth, thick, color=darkblue}
+]
+\node[box, fill=accentgold!30, draw=accentgold] (stft) {STFT\\Espectrograma};
+\node[box, fill=accentgold!30, draw=accentgold, right=of stft] (cqt) {CQT\\Log-freq.};
+\node[box, fill=accentgold!30, draw=accentgold, right=of cqt] (chroma) {Chroma\\Features};
+\node[box, fill=accentgold!30, draw=accentgold, right=of chroma] (harm) {Energ\'ia\\Arm\'onicos};
+
+\node[box, fill=midblue!20, draw=midblue, below=of cqt, xshift=1.5cm,
+      minimum width=5.6cm] (fusion) {Concatenaci\'on de caracter\'isticas};
+
+\node[box, fill=traincolor!20, draw=traincolor, below=of fusion]
+  (conv1) {Conv2D + BN + ReLU\\ (32 filtros, 3$\times$3)};
+\node[box, fill=traincolor!30, draw=traincolor, below=of conv1]
+  (conv2) {Conv2D + BN + ReLU\\ (64 filtros, 3$\times$3)};
+\node[box, fill=traincolor!40, draw=traincolor, below=of conv2]
+  (conv3) {Conv2D + BN + ReLU\\ (128 filtros, 3$\times$3)};
+\node[box, fill=traincolor!15, draw=traincolor, below=of conv3]
+  (pool) {GlobalAvgPool2D};
+\node[box, fill=accent!20, draw=accent, below=of pool]
+  (fc) {FC + Dropout(0.5)};
+\node[box, fill=accent!40, draw=accent, below=of fc, minimum width=3.8cm]
+  (out) {Softmax --- Acorde};
+
+\draw[arr] (stft.south) -- ++(0,-0.28) -| (fusion.north west);
+\draw[arr] (cqt.south)  -- (fusion.north);
+\draw[arr] (chroma.south) -- ++(0,-0.28) -| ([xshift=6pt]fusion.north);
+\draw[arr] (harm.south) -- ++(0,-0.28) -| (fusion.north east);
+
+\foreach \f/\t in {fusion/conv1,conv1/conv2,conv2/conv3,conv3/pool,pool/fc,fc/out}
+  \draw[arr] (\f) -- (\t);
+
+\node[font=\tiny, color=gray, right=2pt of conv1] {MaxPool 2$\times$2};
+\node[font=\tiny, color=gray, right=2pt of conv2] {MaxPool 2$\times$2};
+\node[font=\footnotesize\itshape, color=gray, above=4pt of stft] {Audio .wav / .flac / .mp3};
+\end{tikzpicture}
+\end{center}
+
+\vspace{4pt}
+\begin{columns}[t]
+  \begin{column}{0.5\linewidth}
+    \begin{tcolorbox}[archbox]
+    \textbf{Optimizaci\'on:} B\'usqueda bayesiana de hiperpar\'ametros
+    (lr, batch size, n\'umero de capas)
+    \end{tcolorbox}
+  \end{column}
+  \begin{column}{0.5\linewidth}
+    \begin{tcolorbox}[archbox]
+    \textbf{Entrenamiento:} PyTorch + librosa $\cdot$ 50 \'epocas $\cdot$
+    Adam $\cdot$ Cross-entropy loss
+    \end{tcolorbox}
+  \end{column}
+\end{columns}
+\end{tcolorbox}
+
+\end{column}
+\end{columns}
+
+\vspace{6pt}
+
+%% ============================================================
+%%  METRIC BOXES
+%% ============================================================
+\begin{columns}[c,totalwidth=\linewidth]
+  \begin{column}{0.24\linewidth}
+    \begin{tcolorbox}[metricbox=traincolor, height=3.0cm]
+      {\fontsize{33}{36}\selectfont\textcolor{traincolor}{55.12\,\%}}\\[2pt]
+      {\large Acc.\ entrenamiento}\\{\small (\'epoca 50)}
+    \end{tcolorbox}
+  \end{column}
+  \begin{column}{0.24\linewidth}
+    \begin{tcolorbox}[metricbox=testcolor, height=3.0cm]
+      {\fontsize{33}{36}\selectfont\textcolor{testcolor}{45.64\,\%}}\\[2pt]
+      {\large Mejor acc.\ prueba}\\{\small (\'epoca 31)}
+    \end{tcolorbox}
+  \end{column}
+  \begin{column}{0.24\linewidth}
+    \begin{tcolorbox}[metricbox=losscolor, height=3.0cm]
+      {\fontsize{33}{36}\selectfont\textcolor{losscolor}{1.4777}}\\[2pt]
+      {\large Loss final}\\{\small Cross-entropy (\'ep.\ 50)}
+    \end{tcolorbox}
+  \end{column}
+  \begin{column}{0.24\linewidth}
+    \begin{tcolorbox}[metricbox=accentgold, height=3.0cm]
+      {\fontsize{33}{36}\selectfont\textcolor{accentgold!80!black}{50}}\\[2pt]
+      {\large \'Epocas totales}\\{\small $\approx$39\,s / \'ep.\ (inicio)}
+    \end{tcolorbox}
+  \end{column}
+\end{columns}
+
+\vspace{6pt}
+
+%% ============================================================
+%%  TRAINING CURVES
+%% ============================================================
+\begin{tcolorbox}[sectionbox, title={$\sim$ Curvas de Entrenamiento --- CNN 2-D (50 \'epocas)}]
+\begin{columns}[c]
+
+%% Loss plot
+\begin{column}{0.48\linewidth}
+\begin{tikzpicture}
+\begin{axis}[
+  width=\linewidth, height=7.2cm,
+  xlabel={\'Epoca}, ylabel={Loss (Cross-Entropy)},
+  xlabel style={font=\small}, ylabel style={font=\small},
+  tick label style={font=\footnotesize},
+  xmin=1, xmax=50, ymin=1.35, ymax=2.85,
+  grid=major, grid style={dotted, gray!50},
+  legend style={at={(0.97,0.97)}, anchor=north east, font=\footnotesize,
+                fill=white, draw=gray!40},
+  title={P\'erdida de entrenamiento},
+  title style={font=\small\bfseries\color{darkblue}}
+]
+\addplot[color=losscolor, thick, mark=none] coordinates {
+(1,2.6774)(2,2.2129)(3,2.0524)(4,1.9714)(5,1.9124)(6,1.8704)(7,1.8396)
+(8,1.8100)(9,1.7891)(10,1.7631)(11,1.7490)(12,1.7293)(13,1.7145)(14,1.7008)
+(15,1.6900)(16,1.6763)(17,1.6663)(18,1.6559)(19,1.6459)(20,1.6339)
+(21,1.6245)(22,1.6176)(23,1.6074)(24,1.6051)(25,1.5984)(26,1.5942)
+(27,1.5849)(28,1.5775)(29,1.5738)(30,1.5668)(31,1.5606)(32,1.5507)
+(33,1.5529)(34,1.5472)(35,1.5409)(36,1.5343)(37,1.5322)(38,1.5247)
+(39,1.5249)(40,1.5204)(41,1.5150)(42,1.5086)(43,1.5073)(44,1.5025)
+(45,1.4993)(46,1.4938)(47,1.4875)(48,1.4839)(49,1.4853)(50,1.4777)
+};
+\addlegendentry{Train Loss}
+\addplot[color=gray, dashed, very thin] coordinates {(31,1.35)(31,2.85)};
+\node[font=\tiny, color=gray, anchor=south] at (axis cs:31,2.8) {\'ep.31};
+\end{axis}
+\end{tikzpicture}
+\end{column}
+
+%% Accuracy plot
+\begin{column}{0.48\linewidth}
+\begin{tikzpicture}
+\begin{axis}[
+  width=\linewidth, height=7.2cm,
+  xlabel={\'Epoca}, ylabel={Exactitud (\%)},
+  xlabel style={font=\small}, ylabel style={font=\small},
+  tick label style={font=\footnotesize},
+  xmin=1, xmax=50, ymin=20, ymax=90,
+  ytick={20,30,40,50,60,70,80,85,90},
+  grid=major, grid style={dotted, gray!50},
+  legend style={at={(0.03,0.97)}, anchor=north west, font=\footnotesize,
+                fill=white, draw=gray!40},
+  title={Exactitud entrenamiento vs prueba},
+  title style={font=\small\bfseries\color{darkblue}}
+]
+\addplot[color=traincolor, thick, mark=none] coordinates {
+(1,21.51)(2,35.44)(3,39.60)(4,41.70)(5,43.40)(6,44.46)(7,45.22)
+(8,46.13)(9,46.63)(10,47.32)(11,47.70)(12,48.17)(13,48.67)(14,48.78)
+(15,49.21)(16,49.72)(17,50.06)(18,50.15)(19,50.32)(20,50.74)
+(21,50.96)(22,51.30)(23,51.74)(24,51.60)(25,51.79)(26,51.90)
+(27,51.99)(28,52.37)(29,52.62)(30,52.51)(31,52.84)(32,53.14)
+(33,53.14)(34,53.20)(35,53.39)(36,53.33)(37,53.63)(38,53.75)
+(39,53.78)(40,54.03)(41,53.98)(42,54.26)(43,54.40)(44,54.50)
+(45,54.45)(46,54.62)(47,54.63)(48,54.93)(49,54.98)(50,55.12)
+};
+\addlegendentry{Train Acc}
+
+\addplot[color=testcolor, thick, mark=none] coordinates {
+(1,30.80)(2,37.79)(3,39.96)(4,38.54)(5,42.10)(6,43.25)(7,41.72)
+(8,43.37)(9,42.00)(10,42.32)(11,43.55)(12,44.16)(13,43.97)(14,43.95)
+(15,44.58)(16,44.48)(17,42.49)(18,44.53)(19,44.35)(20,44.59)
+(21,44.33)(22,42.67)(23,42.95)(24,43.23)(25,43.44)(26,43.39)
+(27,44.11)(28,42.08)(29,43.90)(30,43.92)(31,45.64)(32,43.10)
+(33,44.47)(34,43.97)(35,44.31)(36,42.58)(37,44.26)(38,43.11)
+(39,43.32)(40,43.28)(41,43.74)(42,42.72)(43,43.47)(44,44.04)
+(45,44.45)(46,43.84)(47,43.77)(48,44.09)(49,43.78)(50,42.70)
+};
+\addlegendentry{Test Acc}
+
+\addplot[color=testcolor, only marks, mark=*, mark size=3.2pt]
+  coordinates {(31,45.64)};
+\node[font=\tiny\bfseries, color=testcolor, anchor=south west]
+  at (axis cs:31,45.64) {45.64\,\%};
+
+\addplot[color=accent, dashed, thick] coordinates {(1,85)(50,85)};
+\addlegendentry{Objetivo 85\,\%}
+\end{axis}
+\end{tikzpicture}
+\end{column}
+
+\end{columns}
+\end{tcolorbox}
+
+\vspace{6pt}
+
+%% ============================================================
+%%  ANALYSIS + NEXT STEPS
+%% ============================================================
+\begin{columns}[t,totalwidth=\linewidth]
+
+\begin{column}{0.48\linewidth}
+\begin{tcolorbox}[sectionbox, title={$\checkmark$ An\'alisis de Resultados}]
+\begin{itemize}\setlength\itemsep{3pt}
+  \item La \textbf{p\'erdida de entrenamiento} disminuye consistentemente de 2.677 a 1.478 a lo largo de 50 \'epocas, indicando convergencia sostenida.
+  \item La \textbf{exactitud de entrenamiento} sube de 21.5\,\% a 55.1\,\%, reflejando una capacidad de ajuste progresiva sobre GuitarSet.
+  \item La \textbf{exactitud de prueba} se estabiliza entre 42\,\%--45\,\%, alcanzando su pico en \textbf{45.64\,\% en la \'epoca 31}, con variabilidad posterior.
+  \item La brecha entre train acc (55\,\%) y test acc (43\,\%) sugiere \textbf{sobreajuste moderado}, indicando necesidad de mayor regularizaci\'on o datos.
+  \item El desempe\~no actual est\'a \textbf{por debajo del 85\,\%} objetivo, lo que motiva la exploraci\'on de CNN+RNN y Transformer.
+\end{itemize}
+\end{tcolorbox}
+\end{column}
+
+\begin{column}{0.48\linewidth}
+\begin{tcolorbox}[sectionbox, title={$\Rightarrow$ Pr\'oximos Pasos}]
+\begin{tcolorbox}[archbox, colback=traincolor!8, colframe=traincolor]
+\textbf{\textcolor{traincolor}{Arquitecturas pendientes:}}
+CNN+RNN (LSTM) para capturar dependencias temporales entre acordes; Transformer con atenci\'on multi-cabeza sobre espectrogramas.
+\end{tcolorbox}
+\vspace{4pt}
+\begin{tcolorbox}[archbox, colback=accent!8, colframe=accent]
+\textbf{\textcolor{accent}{Mejoras al CNN-2D:}}
+Aumentaci\'on de datos (pitch shifting, time stretching), ajuste de dropout, b\'usqueda bayesiana de hiperpar\'ametros.
+\end{tcolorbox}
+\vspace{4pt}
+\begin{tcolorbox}[archbox, colback=losscolor!8, colframe=losscolor]
+\textbf{\textcolor{losscolor}{Evaluaci\'on de robustez:}}
+Pruebas con variaciones de afinaci\'on, t\'ecnicas de ejecuci\'on (dedos vs p\'ua) y ruido de fondo. An\'alisis por factor.
+\end{tcolorbox}
+\vspace{4pt}
+\begin{tcolorbox}[archbox, colback=accentgold!15, colframe=accentgold]
+\textbf{\textcolor{accentgold!80!black}{Meta final:}}
+Comparaci\'on cruzada de los tres modelos; publicaci\'on y liberaci\'on de c\'odigo bajo licencia MIT en GitHub.
+\end{tcolorbox}
+\end{tcolorbox}
+\end{column}
+
+\end{columns}
+
+\vspace{6pt}
+
+%% ============================================================
+%%  FOOTER
+%% ============================================================
+\begin{tcolorbox}[
+  enhanced, colback=darkblue, colframe=darkblue,
+  arc=0pt, boxrule=0pt,
+  left=16pt, right=16pt, top=6pt, bottom=6pt
+]
+\begin{columns}[c]
+  \begin{column}{0.44\linewidth}
+    {\color{white}\small\textbf{Herramientas:} Python $\cdot$ PyTorch $\cdot$ librosa $\cdot$ GuitarSet}\\
+    {\color{white!70!darkblue}\small STFT $\cdot$ CQT $\cdot$ Chroma features $\cdot$ Energ\'ia arm\'onicos}
+  \end{column}
+  \begin{column}{0.3\linewidth}
+    \centering
+    {\color{accentgold}\small\textbf{\'Area:} Music Information Retrieval}\\
+    {\color{white!70!darkblue}\small Transcripci\'on Autom\'atica de M\'usica (AMT)}
+  \end{column}
+  \begin{column}{0.25\linewidth}
+    \raggedleft
+    {\color{white}\small [GitHub] C\'odigo bajo licencia \textbf{MIT}}\\
+    {\color{white!70!darkblue}\small Avance --- CNN 2-D $\cdot$ 50 \'epocas}
+  \end{column}
+\end{columns}
+\end{tcolorbox}
+
+\end{frame}
+\end{document}
